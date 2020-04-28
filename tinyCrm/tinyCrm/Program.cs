@@ -1,10 +1,11 @@
 ﻿using System;
 
+
 namespace tinyCrm
 {
     using System;
     using System.Text.RegularExpressions;
-
+    
     class Program
     {
         public void PrintName(string name)
@@ -14,14 +15,24 @@ namespace tinyCrm
 
         static void Main(string[] args)
         {
-            //   var name = Console.ReadLine();            
+            //   var name = Console.ReadLine();
 
             Program p = new Program();
-            //p.PrintName(name);            
+            //p.PrintName(name);
+            Customer zaridak = null;
+            try
+            {
+                zaridak = new Customer("test@te@st.com", "813445679", "testteste", 4);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
-            Console.WriteLine(p.IsValidEmail2("test@.com"));
+            Product lol = new Product();
+            lol.code = "aek";
 
-            var result = p.IsValidEmail2("test@test.com  ");
+
+            Console.WriteLine(zaridak.toString());
             Console.ReadLine();
         }
 
@@ -37,7 +48,6 @@ namespace tinyCrm
                     return true;
                 }
             }
-
             return false;
         }
 
