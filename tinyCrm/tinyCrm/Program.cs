@@ -26,20 +26,42 @@ namespace tinyCrm
                 foreach(KeyValuePair<string,Product> tmp in ProductsList2)
                 {
                     Console.WriteLine(tmp.Value.toString());
-                }                
+                }
 
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            Order a = new Order("lolaa");
-            Order b = new Order("lolab");
-            Order c = new Order("lolac");
+            Customer firstCustomer = new Customer("first@live.com", "123456789",
+                "123123123", "Alexandros", "Zaridak");
 
-            Console.WriteLine(a.getOrderId());
-            Console.WriteLine(b.getOrderId());
-            Console.WriteLine(c.getOrderId());
+            Customer SecondCustomer = new Customer("second@live.com", "987654321",
+                "321654123", "Test2", "Customer2");
+
+            Order a = new Order("order1");
+            Order b = new Order("order2");
+            Order c = new Order("order3");
+
+            ProductsList = p.DictToList(ProductsList2);
+
+            a.AddProduct(ProductsList[1]);
+            a.AddProduct(ProductsList[2]);
+            a.AddProduct(ProductsList[3]);
+
+            b.AddProduct(ProductsList[4]);
+            b.AddProduct(ProductsList[5]);
+            b.AddProduct(ProductsList[6]);
+
+            firstCustomer.AddNewOrder(a);
+            //firstCustomer.AddNewOrder(b);
+            SecondCustomer.AddNewOrder(b);
+
+            Console.WriteLine("Order a total Amount: "+a.getTotalAmount());
+            Console.WriteLine("Order b total Amount: "+b.getTotalAmount());
+
+            Console.WriteLine($"FirstCustomer totalGross: {firstCustomer.getTotalGross()}");
+            Console.WriteLine($"SecondCustomer totalGross: {SecondCustomer.getTotalGross()}");
 
             Console.ReadLine();
         }
@@ -58,6 +80,17 @@ namespace tinyCrm
             }
             return tmpDic;
         }
+
+        public List<Product> DictToList(Dictionary<string, Product> dic)
+        {
+            List<Product> ret = new List<Product>();
+            foreach (KeyValuePair<string, Product> tmp in dic)
+            {
+                ret.Add(tmp.Value);
+            }
+            return ret;
+        }
+
 
         bool IsAdult(int age)
         {

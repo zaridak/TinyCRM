@@ -5,14 +5,14 @@ using System.Collections;
 
 namespace tinyCrm
 {
-    class Order
+    public class Order
     {
         List<Product> AllProducts;
 
         private static long OrderId = 0;
         public long MyOrderId { get; set; }
         public string DeliveryAddress { get; set; }
-        public decimal TotalAmount { get; }
+        public decimal TotalAmount;
 
         public Order(string DeliveryAddress)
         {
@@ -24,6 +24,16 @@ namespace tinyCrm
         public void AddProduct(Product p)
         {
             this.AllProducts.Add(p);
+        }
+
+        public decimal getTotalAmount()
+        {
+            decimal tmpAmount = 0.0M;
+            foreach(Product tmp in this.AllProducts)
+            {
+                tmpAmount += tmp.Price;
+            }
+            return tmpAmount;
         }
 
         public long getOrderId() { return this.MyOrderId; }

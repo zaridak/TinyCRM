@@ -15,12 +15,12 @@ namespace tinyCrm
         public bool IsActive { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        private List<Order> MyOrders;
+        private List<Order> MyOrders = null;
         
 
         public Customer(){}
 
-        public Customer(string email, string vatNumber, string phone, decimal totalGross,string FirstName,string LastName)
+        public Customer(string email, string vatNumber, string phone,string FirstName,string LastName)
         {
             if (!IsValidEmail(email))
                 throw new Exception("Invalid Email");
@@ -29,12 +29,28 @@ namespace tinyCrm
             this.Email = email;
             this.VatNumber = vatNumber;
             this.Phone = phone;
-            this.TotalGross = totalGross;
             this.Created = DateTime.Now;
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.MyOrders = new List<Order>();
         }
+
+        public void AddNewOrder(Order order)
+        {
+            this.MyOrders.Add(order);
+        }
+
+        public decimal getTotalGross()
+        {
+            decimal tmpTotalGross = 0.0M;
+            foreach(Order tmpOrder in MyOrders)
+            {
+                tmpTotalGross += tmpOrder.getTotalAmount();
+            }
+
+            return tmpTotalGross;
+        }
+
 
         public string toString()
         {
