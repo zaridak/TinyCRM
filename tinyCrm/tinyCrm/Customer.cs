@@ -15,12 +15,12 @@ namespace tinyCrm
         public bool IsActive { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        private List<Order> MyOrders;
+        
 
-        public Customer()
-        {            
-        }
+        public Customer(){}
 
-        public Customer(string email, string vatNumber, string phone, decimal totalGross)
+        public Customer(string email, string vatNumber, string phone, decimal totalGross,string FirstName,string LastName)
         {
             if (!IsValidEmail(email))
                 throw new Exception("Invalid Email");
@@ -31,6 +31,9 @@ namespace tinyCrm
             this.Phone = phone;
             this.TotalGross = totalGross;
             this.Created = DateTime.Now;
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+            this.MyOrders = new List<Order>();
         }
 
         public string toString()
@@ -73,6 +76,21 @@ namespace tinyCrm
             }
 
             return true;
+        }
+
+        bool IsValidEmail2(string mail)
+        {
+            if (!string.IsNullOrWhiteSpace(mail))
+            {
+                mail = mail.Trim();
+
+                if (mail.Contains("@") &&
+                    (mail.EndsWith(".com") || mail.EndsWith(".gr")))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }

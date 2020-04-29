@@ -1,92 +1,67 @@
 ﻿using System;
 
-
 namespace tinyCrm
 {
     using System;
-    using System.Text.RegularExpressions;
-    
+    using System.Collections.Generic;
+    using System.IO;
+
     class Program
-    {
-        public void PrintName(string name)
-        {
-            Console.WriteLine($"You gave me us name: {name}");
-        }
+    {        
 
         static void Main(string[] args)
         {
-            //   var name = Console.ReadLine();
-
+            
             Program p = new Program();
-            //p.PrintName(name);
-            Customer zaridak = null;
+            List<Product> ProductsList = new List<Product>();
+            //product Id, whole Product
+            Dictionary<string, Product> ProductsList2 = new Dictionary<string, Product>();
+
             try
             {
-                zaridak = new Customer("test@te@st.com", "813445679", "testteste", 4);
-            }catch(Exception ex)
+                List<Product> AllProducts = new List<Product>();
+                string filePath = "C:\\Users\\User\\Desktop\\dotNetProjectCH\\tinyCrm\\tinyCrm\\tinyCrm\\Products.txt";
+                ProductsList2 = p.readFile(filePath);
+
+                foreach(KeyValuePair<string,Product> tmp in ProductsList2)
+                {
+                    Console.WriteLine(tmp.Value.toString());
+                }                
+
+            }
+            catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            Order a = new Order("lolaa");
+            Order b = new Order("lolab");
+            Order c = new Order("lolac");
 
-            Product lol = new Product();
-            lol.code = "aek";
+            Console.WriteLine(a.getOrderId());
+            Console.WriteLine(b.getOrderId());
+            Console.WriteLine(c.getOrderId());
 
-
-            Console.WriteLine(zaridak.toString());
             Console.ReadLine();
         }
 
-        bool IsValidEmail2(string mail)
+
+        public Dictionary<string, Product> readFile(string FilePath)
         {
-            if (!string.IsNullOrWhiteSpace(mail))
+            //List<Product> all = new List<Product>();
+            Dictionary<string, Product> tmpDic = new Dictionary<string, Product>();
+            foreach (string line in File.ReadLines(FilePath))
             {
-                mail = mail.Trim();
-
-                if (mail.Contains("@") &&
-                    (mail.EndsWith(".com") || mail.EndsWith(".gr")))
-                {
-                    return true;
-                }
+                String[] tmp = line.Split(";");
+                if (tmp[0] == "productId") continue;
+                //all.Add(new Product(tmp[0], tmp[1], tmp[2]));
+                tmpDic.Add(tmp[0], new Product(tmp[0], tmp[1], tmp[2]));
             }
-            return false;
+            return tmpDic;
         }
-
-        bool IsValidEmail(string mail)
-        {
-            Regex mRegxExpression;
-
-            if (mail.Trim() != string.Empty)
-            {
-                mRegxExpression = new Regex(@"^([a-zA-Z0-9_\-])([a-zA-Z0-9_\-\.]*)@(\[((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}|((([a-zA-Z0-9\-]+)\.)+))([a-zA-Z]{2,}|(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\])$");
-
-                if (!mRegxExpression.IsMatch(mail.Trim()))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
 
         bool IsAdult(int age)
         {
             return (age >= 18 && age < 100) ? true : false;
-        }
-
-        bool IsValidAfm(string afm)
-        {
-            if (string.IsNullOrWhiteSpace(afm))
-                return false;
-            afm = afm.Trim();
-            if (afm.Length != 9)
-                return false;
-            foreach (char c in afm)
-            {
-                if (c < '0' || c > '9')
-                    return false;
-            }
-
-            return true;
         }
 
         public string checkLength(string test)
