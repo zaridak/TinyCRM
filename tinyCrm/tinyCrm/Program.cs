@@ -20,7 +20,7 @@ namespace tinyCrm
             try
             {
                 List<Product> AllProducts = new List<Product>();
-                string filePath = "C:\\Users\\User\\Desktop\\dotNetProjectCH\\tinyCrm\\tinyCrm\\tinyCrm\\Products.txt";
+                string filePath = "C:\\Users\\alexa\\source\\repos\\tinyCRM\\tinyCRM\\tinyCrm\\products.txt";
                 ProductsList2 = p.readFile(filePath);
 
                 foreach(KeyValuePair<string,Product> tmp in ProductsList2)
