@@ -15,8 +15,7 @@ namespace tinyCrm
         public bool IsActive { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        private List<Order> MyOrders = null;
-        
+        private List<Order> MyOrders = null;        
 
         public Customer(){}
 
@@ -50,7 +49,6 @@ namespace tinyCrm
 
             return tmpTotalGross;
         }
-
 
         public string toString()
         {

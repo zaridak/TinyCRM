@@ -17,9 +17,8 @@ namespace tinyCrm
             this.Name = Name;
             this.Description = Description;
             Random r = new Random();
-            this.Price = (decimal)(r.NextDouble() * 100);
+            this.Price = Math.Round((decimal)(r.NextDouble() * 100), 2);
         }
-
 
         public string toString()
         {

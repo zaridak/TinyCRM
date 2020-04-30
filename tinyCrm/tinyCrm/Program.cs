@@ -56,16 +56,15 @@ namespace tinyCrm
             firstCustomer.AddNewOrder(a);
             //firstCustomer.AddNewOrder(b);
             SecondCustomer.AddNewOrder(b);
+            
+            Console.WriteLine("Order a total Amount: "+ String.Format("{0:0.##}", a.getTotalAmount()));
+            Console.WriteLine("Order b total Amount: "+ String.Format("{0:0.##}", b.getTotalAmount()));
 
-            Console.WriteLine("Order a total Amount: "+a.getTotalAmount());
-            Console.WriteLine("Order b total Amount: "+b.getTotalAmount());
-
-            Console.WriteLine($"FirstCustomer totalGross: {firstCustomer.getTotalGross()}");
-            Console.WriteLine($"SecondCustomer totalGross: {SecondCustomer.getTotalGross()}");
+            Console.WriteLine($"FirstCustomer totalGross: { String.Format("{0:0.##}", firstCustomer.getTotalGross())}");
+            Console.WriteLine($"SecondCustomer totalGross: {String.Format("{0:0.##}", SecondCustomer.getTotalGross())}");
 
             Console.ReadLine();
         }
-
 
         public Dictionary<string, Product> readFile(string FilePath)
         {
@@ -80,7 +79,6 @@ namespace tinyCrm
             }
             return tmpDic;
         }
-
         public List<Product> DictToList(Dictionary<string, Product> dic)
         {
             List<Product> ret = new List<Product>();
@@ -90,7 +88,6 @@ namespace tinyCrm
             }
             return ret;
         }
-
 
         bool IsAdult(int age)
         {
