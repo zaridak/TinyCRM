@@ -38,5 +38,7 @@ namespace tinyCrm
 
         public long getOrderId() { return this.MyOrderId; }
 
+        public List<Product> getAllProducts() { return this.AllProducts; }
+
     }
 }
